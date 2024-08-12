@@ -11015,8 +11015,8 @@ end</script>
 									<colorTriggerFgColor>#000000</colorTriggerFgColor>
 									<colorTriggerBgColor>#000000</colorTriggerBgColor>
 									<regexCodeList>
-										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as swelting heat eminates from it\.$</string>
 										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as sweltering heat emanates from it\.$</string>
+										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as sweltering heat eminates from it\.$</string>
 									</regexCodeList>
 									<regexCodePropertyList>
 										<integer>1</integer>
@@ -12523,6 +12523,33 @@ end</script>
 										<string>^The ashen curse placed upon (\w+) lifts\.$</string>
 									</regexCodeList>
 									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>Aeroblast prone</name>
+									<script>if matches[2] == snd.target then
+  snd.target_got("fallen")
+  if snd.checkAff("torso_broken") then
+    snd.target_got("no_speed")
+  end
+end</script>
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^The howling winds crash into either side of (\w+), flipping .+ over and smashing .+ against the ground\.$</string>
+										<string>^A nauseating jolt runs through (\w+), causing .+ to smash against the ground\.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
 										<integer>1</integer>
 									</regexCodePropertyList>
 								</Trigger>
@@ -14784,8 +14811,10 @@ end
 											<string>^Swinging through the air toward (\w+)'s (.+?) with .+, \w+ draws? lines of blood\.$</string>
 											<string>^With a broad sweep of .+, \w+ brings? a crushing blow onto (\w+)'s (.+)\.$</string>
 											<string>^Holding .+ straight in front of \w+, \w+ bash(?:es)? the end into (\w+)'s (.+)\.$</string>
+											<string>^Lunging .+ at (\w+)'s (.+) in a rapid stab, bones snap beneath your grip\.$</string>
 										</regexCodeList>
 										<regexCodePropertyList>
+											<integer>1</integer>
 											<integer>1</integer>
 											<integer>1</integer>
 											<integer>1</integer>
@@ -32615,10 +32644,12 @@ end</script>
 							<string>You have cleared your axes queue.</string>
 							<string>You are not wielding a handaxe in either of your hands.</string>
 							<string>You have cleared your eqbal queue.</string>
+							<string>You see no 'remains' to take.</string>
 						</regexCodeList>
 						<regexCodePropertyList>
 							<integer>1</integer>
 							<integer>1</integer>
+							<integer>3</integer>
 							<integer>3</integer>
 							<integer>3</integer>
 							<integer>3</integer>
@@ -83020,10 +83051,7 @@ end</script>
       end
     end,
     Aeroblast = function(target)
-      snd.target_got("fallen")
-      if snd.checkAff("torso_broken") then
-        snd.target_got("no_speed")
-      end
+      --all effects delayed
     end
   },
   
@@ -83092,10 +83120,7 @@ end</script>
       end
     end,
     Synaptopathy = function(target)
-      snd.target_got("fallen")
-      if snd.checkAff("torso_broken") then
-        snd.target_got("no_speed")
-      end
+      --all effects delayed
     end
   },
   
