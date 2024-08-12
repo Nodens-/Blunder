@@ -1939,10 +1939,10 @@ registerAnonymousEventHandler("sunder_update_toggles", "snd.updateToggles")</scr
     
 
   if snd.gui.enabled then
-    local colors = {["Enorian"] = "bright_cyan", ["Duiran"] = "a_green", ["Spinesreach"] = "light_violet", ["Bloodloch"] = ""}
-    if sndNDB ~= nil then
-      colors = sndNDB.highlighting
-    end
+    local colors = {["Enorian"] = npb.t.config.colors["enorian"], ["Duiran"] = npb.t.config.colors["duiran"], ["Spinesreach"] = npb.t.config.colors["spinesreach"], ["Bloodloch"] = npb.t.config.colors["bloodloch"]}
+    -- if sndNDB ~= nil then
+    --  colors = sndNDB.highlighting
+    -- end
   
     if #enorian &gt;= 1 then
       enorian_people:cecho("&lt;"..colors["Enorian"].."&gt;&lt;center&gt;" .. table.concat(enorian, "&lt;br&gt;") .. "&lt;/center&gt;")
