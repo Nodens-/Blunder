@@ -77882,7 +77882,7 @@ function snd.praenomen_bash()
     end
   elseif hp &lt;= 45 and bp &gt;= 5 and snd.balance.mend and hasSkill("Mending") then
     battack = "mend"
-  elseif bp &gt;= 10 and hp &lt;= 30 and hasSkill("Deluge") then
+  elseif bp &gt;= 5 and hp &lt;= 30 and hasSkill("Deluge") then
     if snd.balance.unbroken and snd.defenses.def_deluge.state == "down" then
       battack = "blood deluge"..snd.sep.."frenzy "..snd.bashing.target
     else
