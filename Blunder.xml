@@ -3,7 +3,7 @@
 <MudletPackage version="1.001">
 	<TriggerPackage>
 		<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-			<name>Sunder</name>
+			<name>Blunder</name>
 			<script></script>
 			<triggerType>0</triggerType>
 			<conditonLineDelta>0</conditonLineDelta>
@@ -125,42 +125,27 @@ if snd.class == "Monk" then
   snd.stance = gmcp.Char.Vitals.stance
 end
 snd.new.room = false</script>
-					<triggerType>0</triggerType>
-					<conditonLineDelta>1</conditonLineDelta>
-					<mStayOpen>0</mStayOpen>
-					<mCommand></mCommand>
-					<packageName></packageName>
-					<mFgColor>#ff0000</mFgColor>
-					<mBgColor>#ffff00</mBgColor>
-					<mSoundFile></mSoundFile>
-					<colorTriggerFgColor>#00b300</colorTriggerFgColor>
-					<colorTriggerBgColor>#000000</colorTriggerBgColor>
-					<regexCodeList>
-						<string></string>
-						<string>^.+</string>
-					</regexCodeList>
-					<regexCodePropertyList>
-						<integer>7</integer>
-						<integer>1</integer>
-					</regexCodePropertyList>
-				</Trigger>
-				<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-					<name>Tracking</name>
-					<script></script>
-					<triggerType>0</triggerType>
-					<conditonLineDelta>0</conditonLineDelta>
-					<mStayOpen>0</mStayOpen>
-					<mCommand></mCommand>
-					<packageName></packageName>
-					<mFgColor>#ff0000</mFgColor>
-					<mBgColor>#ffff00</mBgColor>
-					<mSoundFile></mSoundFile>
-					<colorTriggerFgColor>#000000</colorTriggerFgColor>
-					<colorTriggerBgColor>#000000</colorTriggerBgColor>
-					<regexCodeList />
-					<regexCodePropertyList />
+						<triggerType>0</triggerType>
+						<conditonLineDelta>1</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#00b300</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string></string>
+							<string>^.+</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>7</integer>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
 					<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-						<name>Defenses</name>
+						<name>Tracking</name>
 						<script></script>
 						<triggerType>0</triggerType>
 						<conditonLineDelta>0</conditonLineDelta>
@@ -174,16 +159,12 @@ snd.new.room = false</script>
 						<colorTriggerBgColor>#000000</colorTriggerBgColor>
 						<regexCodeList />
 						<regexCodePropertyList />
-						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-							<name>def start</name>
-							<script>for i in pairs(snd.defenses) do
- snd.def_remove(i)
-end
-snd.runemarkMajor, snd.runemarkMinor = "none", "none"
-snd.parrying = "none"</script>
+						<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Defenses</name>
+							<script></script>
 							<triggerType>0</triggerType>
 							<conditonLineDelta>0</conditonLineDelta>
-							<mStayOpen>99</mStayOpen>
+							<mStayOpen>0</mStayOpen>
 							<mCommand></mCommand>
 							<packageName></packageName>
 							<mFgColor>#ff0000</mFgColor>
@@ -191,18 +172,18 @@ snd.parrying = "none"</script>
 							<mSoundFile></mSoundFile>
 							<colorTriggerFgColor>#000000</colorTriggerFgColor>
 							<colorTriggerBgColor>#000000</colorTriggerBgColor>
-							<regexCodeList>
-								<string>You have the following active defences:</string>
-							</regexCodeList>
-							<regexCodePropertyList>
-								<integer>3</integer>
-							</regexCodePropertyList>
+							<regexCodeList />
+							<regexCodePropertyList />
 							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>def end</name>
-								<script>setTriggerStayOpen("def start", 0)</script>
+								<name>def start</name>
+								<script>for i in pairs(snd.defenses) do
+ snd.def_remove(i)
+end
+snd.runemarkMajor, snd.runemarkMinor = "none", "none"
+snd.parrying = "none"</script>
 								<triggerType>0</triggerType>
 								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
+								<mStayOpen>99</mStayOpen>
 								<mCommand></mCommand>
 								<packageName></packageName>
 								<mFgColor>#ff0000</mFgColor>
@@ -211,59 +192,78 @@ snd.parrying = "none"</script>
 								<colorTriggerFgColor>#000000</colorTriggerFgColor>
 								<colorTriggerBgColor>#000000</colorTriggerBgColor>
 								<regexCodeList>
-									<string>^You are protected by (\d+) defences\.$</string>
-								</regexCodeList>
-								<regexCodePropertyList>
-									<integer>1</integer>
-								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>Cruelty/Homage have</name>
-								<script>if snd.class == "Carnifex" then
-  snd.def_def("cruelty")
-else
-  snd.def_def("homage")
-end</script>
-								<triggerType>0</triggerType>
-								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
-								<mCommand></mCommand>
-								<packageName></packageName>
-								<mFgColor>#ff0000</mFgColor>
-								<mBgColor>#ffff00</mBgColor>
-								<mSoundFile></mSoundFile>
-								<colorTriggerFgColor>#000000</colorTriggerFgColor>
-								<colorTriggerBgColor>#000000</colorTriggerBgColor>
-								<regexCodeList>
-									<string>Your strength has been bolstered.</string>
+									<string>You have the following active defences:</string>
 								</regexCodeList>
 								<regexCodePropertyList>
 									<integer>3</integer>
 								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>chameleon</name>
-								<script>snd.def_def("chameleon")</script>
-								<triggerType>0</triggerType>
-								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
-								<mCommand></mCommand>
-								<packageName></packageName>
-								<mFgColor>#ff0000</mFgColor>
-								<mBgColor>#ffff00</mBgColor>
-								<mSoundFile></mSoundFile>
-								<colorTriggerFgColor>#000000</colorTriggerFgColor>
-								<colorTriggerBgColor>#000000</colorTriggerBgColor>
-								<regexCodeList>
-									<string>^You have assumed the identity of \w+.$</string>
-								</regexCodeList>
-								<regexCodePropertyList>
-									<integer>1</integer>
-								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>ylem orbs</name>
-								<script>local color = {
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>def end</name>
+									<script>setTriggerStayOpen("def start", 0)</script>
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^You are protected by (\d+) defences\.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>Cruelty/Homage have</name>
+									<script>if snd.class == "Carnifex" then
+  snd.def_def("cruelty")
+else
+  snd.def_def("homage")
+end</script>
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>Your strength has been bolstered.</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>3</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>chameleon</name>
+									<script>snd.def_def("chameleon")</script>
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^You have assumed the identity of \w+.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>ylem orbs</name>
+									<script>local color = {
   ["white"] = "white",
   ["blue"] = "cerulean",
   ["red"] = "crimson",
@@ -271,68 +271,68 @@ end</script>
   ["green"] = "green",}
   
  snd.def_def(color[matches[2]].."_orb")</script>
-								<triggerType>0</triggerType>
-								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
-								<mCommand></mCommand>
-								<packageName></packageName>
-								<mFgColor>#ff0000</mFgColor>
-								<mBgColor>#ffff00</mBgColor>
-								<mSoundFile></mSoundFile>
-								<colorTriggerFgColor>#000000</colorTriggerFgColor>
-								<colorTriggerBgColor>#000000</colorTriggerBgColor>
-								<regexCodeList>
-									<string>^You are diffused by a (\w+) mist\.$</string>
-								</regexCodeList>
-								<regexCodePropertyList>
-									<integer>1</integer>
-								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>alacrity def</name>
-								<script>alacritycount = tonumber(matches[2])
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^You are diffused by a (\w+) mist\.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>alacrity def</name>
+									<script>alacritycount = tonumber(matches[2])
 snd.def_def("alacrity")</script>
-								<triggerType>0</triggerType>
-								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
-								<mCommand></mCommand>
-								<packageName></packageName>
-								<mFgColor>#ff0000</mFgColor>
-								<mBgColor>#ffff00</mBgColor>
-								<mSoundFile></mSoundFile>
-								<colorTriggerFgColor>#000000</colorTriggerFgColor>
-								<colorTriggerBgColor>#000000</colorTriggerBgColor>
-								<regexCodeList>
-									<string>^Your fingers are energized and ready to act (3|2|1) more times.$</string>
-								</regexCodeList>
-								<regexCodePropertyList>
-									<integer>1</integer>
-								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>efficiency (Alacrity mirror</name>
-								<script>alacritycount = tonumber(matches[2])
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^Your fingers are energized and ready to act (3|2|1) more times.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>efficiency (Alacrity mirror</name>
+									<script>alacritycount = tonumber(matches[2])
 snd.def_def("efficiency")</script>
-								<triggerType>0</triggerType>
-								<conditonLineDelta>0</conditonLineDelta>
-								<mStayOpen>0</mStayOpen>
-								<mCommand></mCommand>
-								<packageName></packageName>
-								<mFgColor>#ff0000</mFgColor>
-								<mBgColor>#ffff00</mBgColor>
-								<mSoundFile></mSoundFile>
-								<colorTriggerFgColor>#000000</colorTriggerFgColor>
-								<colorTriggerBgColor>#000000</colorTriggerBgColor>
-								<regexCodeList>
-									<string>^You are prepared for utmost efficiency (3|2|1) more times\.$</string>
-								</regexCodeList>
-								<regexCodePropertyList>
-									<integer>1</integer>
-								</regexCodePropertyList>
-							</Trigger>
-							<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-								<name>catchall</name>
-								<script>if snd.defenses_list[matches[2]] then
+									<triggerType>0</triggerType>
+									<conditonLineDelta>0</conditonLineDelta>
+									<mStayOpen>0</mStayOpen>
+									<mCommand></mCommand>
+									<packageName></packageName>
+									<mFgColor>#ff0000</mFgColor>
+									<mBgColor>#ffff00</mBgColor>
+									<mSoundFile></mSoundFile>
+									<colorTriggerFgColor>#000000</colorTriggerFgColor>
+									<colorTriggerBgColor>#000000</colorTriggerBgColor>
+									<regexCodeList>
+										<string>^You are prepared for utmost efficiency (3|2|1) more times\.$</string>
+									</regexCodeList>
+									<regexCodePropertyList>
+										<integer>1</integer>
+									</regexCodePropertyList>
+								</Trigger>
+								<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+									<name>catchall</name>
+									<script>if snd.defenses_list[matches[2]] then
   snd.def_def(snd.defenses_list[matches[2]])
 end</script>
 								<triggerType>0</triggerType>
@@ -7047,6 +7047,157 @@ end</script>
 							<integer>3</integer>
 						</regexCodePropertyList>
 					</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Prism Defense</name>
+							<script>if snd.my.room == 66294 then
+  send("qeb north")
+elseif snd.my.room == 1331 then
+  send("qeb east")
+elseif snd.my.room == 9208 then
+  send("qeb north")
+else
+  send("qeb " .. snd.my.room_exits[math.random(#snd.my.room_exits)])
+end</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>A beam of prismatic light suddenly shoots into the room.</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>3</integer>
+							</regexCodePropertyList>
+						</Trigger>
+					</TriggerGroup>
+					<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Pathing</name>
+						<script></script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList />
+						<regexCodePropertyList />
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Path</name>
+							<script>snd.pathfind_path = string.split(matches[2], ", ")</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>^Path\: (.*)$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Path Distance</name>
+							<script>snd.pathfind_distance = tonumber(matches[2])</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>^Distance to .*\: (\d+)\.$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Path Left To Travel</name>
+							<script>snd.pathfind_remain = tonumber(matches[2])</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>^You have (\d+) room\(s\) left to travel\. PATH STOP to halt\.$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
+						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+							<name>Blockades</name>
+							<script>if gmcp.Char.Vitals.mounted~="0" then
+  snd.dismount()
+end
+
+local nextdir = snd.pathfind_distance - snd.pathfind_remain + 1
+local direction = snd.pathfind_path[nextdir]
+local skillnotfound = false
+local advance = false
+
+if hasSkill("Fade") then
+  send("qb fade " .. direction)
+elseif hasSkill("Tumbling") then
+  send("qb tumble " .. direction)
+elseif hasSkill("Advance") then
+  advance = true
+  send("qb gravitation advance 4 " .. direction)
+  tempTimer(4.1, [[send("path track city")]])
+else
+  skillnotfound = true
+end
+
+if not skillnotfound and not advance then
+  tempTimer(2.7, [[send("path track city")]])
+end
+if snd.toggles.automount then
+  snd.mount()
+end
+disableTrigger("Blockades")</script>
+							<triggerType>0</triggerType>
+							<conditonLineDelta>0</conditonLineDelta>
+							<mStayOpen>0</mStayOpen>
+							<mCommand></mCommand>
+							<packageName></packageName>
+							<mFgColor>#ff0000</mFgColor>
+							<mBgColor>#ffff00</mBgColor>
+							<mSoundFile></mSoundFile>
+							<colorTriggerFgColor>#000000</colorTriggerFgColor>
+							<colorTriggerBgColor>#000000</colorTriggerBgColor>
+							<regexCodeList>
+								<string>^A \w+ of .* stops you from moving that way.$</string>
+							</regexCodeList>
+							<regexCodePropertyList>
+								<integer>1</integer>
+							</regexCodePropertyList>
+						</Trigger>
 				</TriggerGroup>
 			</TriggerGroup>
 			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
@@ -11015,8 +11166,8 @@ end</script>
 									<colorTriggerFgColor>#000000</colorTriggerFgColor>
 									<colorTriggerBgColor>#000000</colorTriggerBgColor>
 									<regexCodeList>
+										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as swelting heat eminates from it\.$</string>
 										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as sweltering heat emanates from it\.$</string>
-										<string>^The Brand of Ember seared upon (\w+) glows, rippling outward as sweltering heat eminates from it\.$</string>
 									</regexCodeList>
 									<regexCodePropertyList>
 										<integer>1</integer>
@@ -34645,7 +34796,7 @@ end</script>
 							<string>A small key lies on the ground here.</string>
 						</regexCodeList>
 						<regexCodePropertyList>
-							<integer>1</integer>
+							<integer>0</integer>
 						</regexCodePropertyList>
 					</Trigger>
 					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
@@ -34670,7 +34821,7 @@ end</script>
 							<string>Circle of prayer in the gardens.</string>
 						</regexCodeList>
 						<regexCodePropertyList>
-							<integer>0</integer>
+							<integer>3</integer>
 						</regexCodePropertyList>
 					</Trigger>
 				</TriggerGroup>
@@ -37276,7 +37427,7 @@ end</script>
 	</TriggerPackage>
 	<TimerPackage>
 		<TimerGroup isActive="yes" isFolder="yes" isTempTimer="no" isOffsetTimer="no">
-			<name>Sunder</name>
+			<name>Blunder</name>
 			<script></script>
 			<command></command>
 			<packageName></packageName>
@@ -37325,7 +37476,7 @@ disableTimer("Playing Song")</script>
 	</TimerPackage>
 	<AliasPackage>
 		<AliasGroup isActive="yes" isFolder="yes">
-			<name>Sunder</name>
+			<name>Blunder</name>
 			<script></script>
 			<command></command>
 			<packageName></packageName>
@@ -37928,6 +38079,7 @@ snd.send("config simplediagnose on")
 snd.send("config curingtype default")
 snd.send("config fishgraphic off")
 snd.send("gathering on")
+snd.send("fa defences off")
 npb.init()</script>
 						<command></command>
 						<packageName></packageName>
@@ -38289,6 +38441,19 @@ cecho("&lt;red&gt;Will use &lt;orange&gt;"..(snd.toggles.laesan and "Laesan" or 
 						<command></command>
 						<packageName></packageName>
 						<regex>^toggle automount$</regex>
+					</Alias>
+					<Alias isActive="yes" isFolder="no">
+						<name>Prism Defense</name>
+						<script>if matches[2] == "off" then
+  disableTrigger("Prism Defense")
+  cecho("&lt;yellow&gt;Prism Defense DISABLED.")
+ else
+  enableTrigger("Prism Defense")
+  cecho("&lt;yellow&gt;Prism Defense ENABLED.")
+end</script>
+						<command></command>
+						<packageName></packageName>
+						<regex>^prismdef\s?(\w+)?$</regex>
 					</Alias>
 				</AliasGroup>
 				<AliasGroup isActive="yes" isFolder="yes">
@@ -57313,6 +57478,23 @@ end
 					<packageName></packageName>
 					<regex>^(mygauntlet|mygauntlet (\d+))$</regex>
 				</Alias>
+				<Alias isActive="yes" isFolder="no">
+					<name>Detour</name>
+					<script>if matches[2] == "clear" then
+  snd.detour = nil
+  cecho("&lt;yellow&gt;Detour waypoint cleared.")
+else
+  if tonumber(matches[2]) ~= nil then
+    snd.detour = matches[2]
+    cecho("&lt;yellow&gt;Set detour waypoint to: ".. matches[2])
+  else
+    cecho("&lt;yellow&gt;This is not a valid number.")
+  end
+end</script>
+					<command></command>
+					<packageName></packageName>
+					<regex>^detour (.*)$</regex>
+				</Alias>
 			</AliasGroup>
 			<AliasGroup isActive="yes" isFolder="yes">
 				<name>Neri's Phone Book</name>
@@ -57834,7 +58016,7 @@ save_fishinginfo_db()</script>
 	<ActionPackage />
 	<ScriptPackage>
 		<ScriptGroup isActive="yes" isFolder="yes">
-			<name>Sunder</name>
+			<name>Blunder</name>
 			<packageName></packageName>
 			<script>-------------------------------------------------
 --         Put your Lua functions here.        --
@@ -58695,6 +58877,7 @@ registerAnonymousEventHandler("gmcp.Char.Name", "snd.login")</script>
 					<packageName></packageName>
 					<script>function snd.deathCheck()
   if gmcp.Char.Afflictions.Add.name == "dead" then
+    snd.stap()
     snd.reset_me()
     snd.target_gone = true
     snd.toggles.active = false
@@ -58708,8 +58891,9 @@ end
 function snd.deathClear()
   for _, aff in pairs(gmcp.Char.Afflictions.Remove) do
     if aff == "dead" then
+      snd.stap()
       snd.reset_me()
-      snd.target_gone = true
+      snd.reset_target()
       for i in pairs(snd.defenses) do
         snd.defenses[i].needit = false
       end
@@ -58755,6 +58939,7 @@ registerAnonymousEventHandler("gmcp.Char.Afflictions.Remove", "snd.deathClear")<
   end
   snd.pathing = false
   snd.toggles.fastwalk = false
+  snd.detour_taken = nil
   raiseEvent("sunder_update_toggles")
 end
 
@@ -60384,6 +60569,16 @@ end
 						<script>function snd.get_moving()
   hp = 100 * (gmcp.Char.Vitals.hp / gmcp.Char.Vitals.maxhp)
   if snd.can_path and snd.can_cast() and hp &gt;= 85 and snd.moving_to ~= "none" then
+    if snd.moving_to == "city" and snd.detour and snd.detour_taken == nil then
+      snd.moving_to = snd.detour
+      if snd.detour_taken == nil then
+        snd.detour_taken = 1
+        cecho("&lt;yellow&gt;Taking detour.")
+      end
+    end
+    if snd.moving_to == "city" then
+      enableTrigger("Blockades")
+    end
     if snd.toggles.gallop then
       if gmcp.Char.Vitals.mounted == "0" then
         snd.mount()
@@ -60394,7 +60589,13 @@ end
     else
       snd.send("path track " .. snd.moving_to)
     end
+    if snd.detour_taken == 1 then
+      snd.detour_taken = 2
+      snd.moving_to = "city"
+    else
     snd.moving_to = "none"
+      snd.detour_taken = nil
+    end
     if ylm.active and ylm.next_zone == "city" then
       ylm.active = false
     end
@@ -80059,7 +80260,7 @@ def_soulharvest = "on",
 def_soulthirst = "on",
 def_soul_fortify = "on",
 def_soul_fracture = "once",
-def_soul_body = "once",
+--def_soul_body = "once",
 def_irongrip = "once",
 --def_herculeanrage = "once",
 def_cruelty = "on",
@@ -82142,6 +82343,7 @@ end
 function snd.starting_attack()
   snd.send("target nothing with left" .. snd.sep .. "target nothing with right")
   snd.send("leading off")
+  snd.stap()
   if snd.toggles.attacking == false then
     snd.toggle("attacking")
   end
@@ -88781,7 +88983,7 @@ registerAnonymousEventHandler("mmp link externals", "snd.mapperAutoMount")</scri
 	</ScriptPackage>
 	<KeyPackage>
 		<KeyGroup isActive="yes" isFolder="yes">
-			<name>Sunder</name>
+			<name>Blunder</name>
 			<packageName></packageName>
 			<script></script>
 			<command></command>
