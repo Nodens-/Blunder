@@ -38079,7 +38079,7 @@ snd.send("config simplediagnose on")
 snd.send("config curingtype default")
 snd.send("config fishgraphic off")
 snd.send("gathering on")
-snd.send("fa defences off")
+snd.send("fa defence off")
 npb.init()</script>
 						<command></command>
 						<packageName></packageName>
