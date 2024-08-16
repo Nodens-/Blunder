@@ -4,9 +4,9 @@ the green "Code" button on the right and select to download as zip.
 
 
 # INSTALL
-1. Extract the zip and get Sunder.xml and either SunderGui.xml OR
-KaiSunderGui.xml (NOT BOTH).
-I mainly use the original GUI which is SunderGuid.xml so most improvements and
+1. Extract the zip and get Blunder.xml and either BlunderGui.xml OR
+KaiBlunderGui.xml (NOT BOTH).
+I mainly use the original GUI which is BlunderGui.xml so most improvements and
 fixes will be using that but if you want to use the Kai version and you find
 some issue let me know and we can do something about it.
 
@@ -22,7 +22,7 @@ search for "defense options". From the results you get it should be the
 second. Look on the right, in the editor and find any defenses in the General
 table and your Class' table that you don't know yet, if any, and comment the
 lines by adding -- in front of them so that the defup command won't try to
-bring up defenses you do not know.
+bring up defenses you do not know. (Until I redesign that system).
 
 Example:
 --def_thirdeye = "on"
@@ -34,7 +34,7 @@ This will make defup command not try to keep up the thirdeye defense.
 When a new version is up you have to follow this procedure in order to get a
 clean update.
 Log off. Open your Aetolia profile in Offline mode and:
-1. Remove Sunder or SunderGUI depending which package is getting an update (or
+1. Remove Blunder or BlunderGui/KaiBlunderGui depending which package is getting an update (or
 both if both are).
 Then follow the procedure from INSTALL section again.
 
