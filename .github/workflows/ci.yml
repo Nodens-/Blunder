@@ -1,0 +1,42 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Create and Publish release
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get Repo Name
+        id: get_repo_name
+        run: |
+          # Extract repo name from GITHUB_REPOSITORY variable
+          repo_fullname="${{ github.repository }}"
+          repo_name="${repo_fullname##*/}"
+          echo "REPO_NAME=${repo_name}" >> $GITHUB_ENV
+
+      - name: Get Commit Hash
+        id: get_commit_hash
+        run: |
+          # Extract tag or branch name from GITHUB_REF
+          git_hash="$(git rev-parse --short "$GITHUB_SHA")"
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
+
+      - name: Create Release
+        run: |
+          echo "Repository Name: $REPO_NAME"
+          echo "Git Hash: $GIT_HASH"
+          git archive --format zip --prefix="${REPO_NAME}/" --output "${REPO_NAME}-${GIT_HASH}.zip" HEAD
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
+          echo "GIT_HASH=${GIT_HASH}" >> $GITHUB_ENV
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "${{ env.REPO_NAME }}-${{ env.GIT_HASH }}.zip"
