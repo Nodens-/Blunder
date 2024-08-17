@@ -1,6 +1,11 @@
 # DOWNLOAD
-If you are not familiar with gihub the easiest way to download is to click on
-the green "Code" button on the right and select to download as zip.
+Download the latest release from the releases menu on the right.
+The file will be under "Assets", named something like "Blunder-3045a62.zip"
+
+The zip is generated automatically when changes are pushed to the repository
+and it will show, on the releases page, what the change that triggered a new
+zip release was. The "-3045a62" part of the file name just refers to the
+git commit that created the new release.
 
 
 # INSTALL
@@ -34,9 +39,9 @@ This will make defup command not try to keep up the thirdeye defense.
 When a new version is up you have to follow this procedure in order to get a
 clean update.
 Log off. Open your Aetolia profile in Offline mode and:
-1. Remove Blunder or BlunderGui/KaiBlunderGui depending which package is getting an update (or
-both if both are).
-Then follow the procedure from INSTALL section again.
+1. Remove Blunder or BlunderGui/KaiBlunderGui depending which package is getting
+ an update (or both if both are).
+2. Follow the procedure from INSTALL section again.
 
 ### CAVEAT
 Do to the way updates are handled (this is a Mudlet thing). Any custom
