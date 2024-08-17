@@ -26,17 +26,23 @@ jobs:
         run: |
           # Extract tag or branch name from GITHUB_REF
           git_hash="$(git rev-parse --short "$GITHUB_SHA")"
-          echo "TAG_NAME=${git_hash}" >> $GITHUB_ENV
+          echo "GIT_HASH=${git_hash}" >> $GITHUB_ENV
+
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "::set-output name=release_tag::${REPO_NAME}_$(date +"%Y.%m.%d_%H-%M")_${GIT_HASH}"
 
       - name: Create Release
         run: |
           echo "Repository Name: $REPO_NAME"
-          echo "Tag Name: $TAG_NAME"
-          git archive --format zip --prefix="${REPO_NAME}/" --output "${REPO_NAME}-${TAG_NAME}.zip" HEAD
+          echo "Tag Name: ${{ steps.tag.outputs.release_tag }}"
+          git archive --format zip --prefix="${REPO_NAME}/" --output "${REPO_NAME}-${GIT_HASH}.zip" HEAD
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV
-          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_ENV
+          echo "TAG_NAME=${{ steps.tag.outputs.release_tag }}" >> $GITHUB_ENV
 
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          files: "${{ env.REPO_NAME }}-${{ env.TAG_NAME }}.zip"
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: "${{ env.REPO_NAME }}-${{ env.GIT_HASH }}.zip"
