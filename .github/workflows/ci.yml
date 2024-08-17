@@ -1,9 +1,9 @@
 on:
   push:
     branches:
-      - master
+      - main
 
-name: Create and Publish release
+name: Create and Publish Latest Git
 
 jobs:
   build:

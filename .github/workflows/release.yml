@@ -3,7 +3,7 @@ on:
     tags:
       - "*"
 
-name: Create and Publish release
+name: Create and Publish Tagged Release
 
 jobs:
   build:
