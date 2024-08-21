@@ -40,4 +40,6 @@ jobs:
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ env.TAG_NAME }}
           files: "${{ env.REPO_NAME }}-${{ env.TAG_NAME }}.zip"

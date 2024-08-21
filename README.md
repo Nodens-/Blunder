@@ -45,8 +45,8 @@ Log off. Open your Aetolia profile in Offline mode and:
 
 ### CAVEAT
 Do to the way updates are handled (this is a Mudlet thing). Any custom
-aliases/triggers/etc that you make, you should ALWAYS put OUTSIDE the Sunder
-package even if they depend/use features from Sunder.
+aliases/triggers/etc that you make, you should ALWAYS put OUTSIDE the Blunder
+package even if they depend/use features from Blunder.
 What I do is I make a "Personal" folder and save my custom stuff under there.
 If you don't follow this advice, when you remove the package to update, you
 will lose you custom stuff.
