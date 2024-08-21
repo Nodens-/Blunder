@@ -32,7 +32,7 @@
 				<colorTriggerBgColor>#000000</colorTriggerBgColor>
 				<regexCodeList />
 				<regexCodePropertyList />
-				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="yes" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="yes" isColorTriggerFg="no" isColorTriggerBg="no">
+				<Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="yes" isColorTriggerFg="no" isColorTriggerBg="no">
 					<name>Deathsight</name>
 					<script>if snd.gui.enabled then
   demonnic.chat:append("Misc")
@@ -76,8 +76,16 @@ end</script>
 						<string>The spicy, ashen smell that had been lingering begins to subside and you know the signal fire has been extinguished; there is five minutes before the event begins in the ruins.</string>
 						<string>A spicy, ashen smell touches your nose, the scent familiar to the incense used in the Ophidian Ruins, signalling an event within them has been signalled.</string>
 						<string>A spicy, ashen smell touches your nose, the scent familiar to the incense used in the Ophidian Ruins, signalling an event within them will begin within fifteen minutes.</string>
+						<string>A pulse of twin tremors washes over you from the leylines, the conjoined foci quivering as one of them is tapped.</string>
+						<string>A sudden rumbling seizes the continent of Sapience, shuddering briefly as the earth heaves against itself in a fitful tremor.</string>
+						<string>Inelegant patterns of green light dance across the horizon in a show of brilliance before quickly fading away.</string>
+						<string>A pulse of twin tremors washes over you from the leylines, the conjoined foci quivering as one of them is tapped.</string>
 					</regexCodeList>
 					<regexCodePropertyList>
+						<integer>3</integer>
+						<integer>3</integer>
+						<integer>3</integer>
+						<integer>3</integer>
 						<integer>3</integer>
 						<integer>3</integer>
 						<integer>3</integer>
@@ -234,6 +242,54 @@ end</script>
 					<colorTriggerBgColor>#000000</colorTriggerBgColor>
 					<regexCodeList>
 						<string>^(\w+) just thought\:</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Extra Deathsight Info</name>
+					<script>if snd.gui.enabled then
+  demonnic.chat:append("Misc")
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^Your ally has fallen at .*$</string>
+						<string>^You divine the location of this death as .*$</string>
+						<string>^From your knowledge, that room is in .*$</string>
+					</regexCodeList>
+					<regexCodePropertyList>
+						<integer>1</integer>
+						<integer>1</integer>
+						<integer>1</integer>
+					</regexCodePropertyList>
+				</Trigger>
+				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<name>Wyrms</name>
+					<script>if snd.gui.enabled then
+  demonnic.chat:append("Misc")
+end</script>
+					<triggerType>0</triggerType>
+					<conditonLineDelta>0</conditonLineDelta>
+					<mStayOpen>0</mStayOpen>
+					<mCommand></mCommand>
+					<packageName></packageName>
+					<mFgColor>#ff0000</mFgColor>
+					<mBgColor>#ffff00</mBgColor>
+					<mSoundFile></mSoundFile>
+					<colorTriggerFgColor>#000000</colorTriggerFgColor>
+					<colorTriggerBgColor>#000000</colorTriggerBgColor>
+					<regexCodeList>
+						<string>^The Mhojave desert sands swirl in exultation, recognising .*'s feat in successfully dominating an earth wyrm weighing .* pounds!$</string>
 					</regexCodeList>
 					<regexCodePropertyList>
 						<integer>1</integer>
@@ -403,11 +459,12 @@ end</script>
    name = "vitals",
    x = 0, y = 0,
    width = "100%", height = "4%",
-   fgColor = "white",
+  color = "black", fgColor = "firebrick",
   }, leftContainer);
   vitals:setFontSize(11)
-end
-</script>
+  
+  vitals:cecho("&lt;center&gt;&lt;firebrick&gt;".."BLUNDER")
+end</script>
 					<eventHandlerList />
 				</Script>
 				<Script isActive="yes" isFolder="no">
@@ -418,7 +475,7 @@ end
    name = "wielding",
    x = 0, y = "4%",
    width = "100%", height = "3%",
-   color = "SteelBlue", fgColor = "white",
+   color = "black", fgColor = "firebrick",
    message = [[wielding]],
   }, leftContainer);
   wielding:setFontSize(9)
@@ -430,94 +487,24 @@ function updatedWielded()
     wielding:echo("&lt;center&gt;empty hands&lt;/center&gt;")
   else
     local string = ""
+    local hand = ""
+    if snd.wielded.right.name == "" and snd.weaponTwohanded(snd.wielded.left.name) then
+      hand = "Both Hands"
+    else
+      hand = "Left Hand"
+    end
     if snd.wielded.left.name ~= "" then
-      string = string .. "&lt;center&gt;" .. snd.weaponType(snd.wielded.left.name) .. "&lt;/center&gt;"
+      string = string .. "&lt;center&gt;&lt;SlateBlue&gt;"..hand..": &lt;firebrick&gt;" .. snd.weaponType(snd.wielded.left.name) .. "&lt;/center&gt;"
     end
     if snd.wielded.right.name ~= "" then
-      string = string .. "&lt;center&gt;" .. snd.weaponType(snd.wielded.right.name) .. "&lt;/center&gt;"
+      string = string .. "&lt;center&gt;&lt;SlateBlue&gt;Right Hand: &lt;firebrick&gt;" .. snd.weaponType(snd.wielded.right.name) .. "&lt;/center&gt;"
     end
-    wielding:echo(string)
+    wielding:cecho(string)
   end
 
 end
 registerAnonymousEventHandler("sunder_item_update","updatedWielded")</script>
 					<eventHandlerList />
-				</Script>
-				<Script isActive="yes" isFolder="no">
-					<name>time_update</name>
-					<packageName></packageName>
-					<script>  if snd.gui.enabled then
-  time = Geyser.Label:new({
-   name = "time",
-   x = 0, y = "7%",
-   width = "100%", height = "1.75%",
-   color = "black", fgColor = "white",
-   message = [[time]],
-  }, leftContainer);
-  time:setFontSize(7.45)
-end
-registerAnonymousEventHandler("sunder_login","time_update")
-function time_update()
-  if snd.gui.enabled then
-    sendGMCP("IRE.Time.Request")
-    
-    local d = gmcp.IRE.Time.List.day
-    local m = gmcp.IRE.Time.List.month
-    local y = gmcp.IRE.Time.List.year
-    
-    local t = gmcp.IRE.Time.List.time 
-    	if t:find("late night, approaching midnight") then
-    		time:setFontSize(8)
-     		t = "Late night"
-    	elseif t:find("It is deep night in Aetolia") then
-    		t = "Almost midnight"
-    		time:setFontSize(7.45)
-    	elseif t:find("It is deepest midnight.") then
-    		t = "Midnight"
-    		time:setFontSize(8)
-    	elseif t:find("It is the middle of the night in Aetolia") then
-    		t = "After midnight"
-    		time:setFontSize( 7.45)
-    	elseif t:find("early morning in Aetolia") then
-    		t = "Early morning"
-    		time:setFontSize(7.45)
-    	elseif t:find("approaching dawn.") then
-    		t = "Almost dawn"
-    		time:setFontSize(7.45)
-    	elseif t:find("It is dawn.") then
-    		t = "Dawn"
-    		time:setFontSize(8)
-    	elseif t:find("It's mid-") then
-    		t = "Mid-morning"
-    		time:setFontSize(8)
-    	elseif t:find("approaching noon") then
-    		t = "Almost noon"
-    		time:setFontSize(7.45)
-    	elseif t:find("exactly noon") then
-    		t = "Hiiiigh noooon"
-    		time:setFontSize(7.45)
-    	elseif t:find("early afternoon") then
-    		t = "Early afternoon"
-    		time:setFontSize(7.45)
-    	elseif t:find("It is late afternoon in Aetolia") then
-    		t = "Late afternoon"
-    		time:setFontSize(7.45)
-    	elseif t:find("dusk in Aet") then
-    		t = "Dusk"
-    		time:setFontSize(8)
-    	elseif t:find("Twilight has overtaken the light") then
-    		t = "Early evening"
-    		time:setFontSize(7.45)
-    	else 
-    		--This should only come about if they add a new time to the cycle.
-    	end
-    
-    time:echo("&lt;center&gt;"..t.." "..m.."/"..d.."/"..y.."&lt;/center&gt;")
-  end
-end</script>
-					<eventHandlerList>
-						<string>gmcp.IRE.Time.Update</string>
-					</eventHandlerList>
 				</Script>
 				<Script isActive="yes" isFolder="no">
 					<name>my status</name>
@@ -527,14 +514,14 @@ end</script>
    name = "mystatus",
    x = 0, y = "9%",
    width = "35%", height = "10.5%",
-   color = "slate_gray", fgColor = "white",
+   color = "dark_slate_gray", fgColor = "white",
    message = [[mystatus]],
   }, leftContainer);
   mystatus:setFontSize(9)
   	mystatus:setStyleSheet([[
   		border-width: 3px;
   		border-style: solid;
-  		border-color: DarkCyan;
+  		border-color: DarkRed;
   		
   	]])
   mystatus:echo("&lt;center&gt;".."PASN".."&lt;/center&gt;&lt;center&gt;prone&lt;/center&gt;")
@@ -556,7 +543,7 @@ end</script>
   	mylimbs:setStyleSheet([[
   		border-width: 3px;
   		border-style: solid;
-  		border-color: DarkCyan;
+  		border-color: DarkRed;
   		
   	]])
   mylimbs:echo("&lt;center&gt;0&lt;/center&gt;&lt;center&gt;/|\\&lt;/center&gt;&lt;center&gt;/\\&lt;/center&gt;")
@@ -578,7 +565,7 @@ end</script>
     myaffs:setStyleSheet([[
   border-width: 3px;
   border-style: solid;
-  border-color: DarkCyan;
+  border-color: DarkRed;
   ]])
 end</script>
 					<eventHandlerList />
@@ -661,11 +648,11 @@ end</script>
   }, leftContainer);
   toggles:setFontSize(9)
   toggles:clear()
-  toggles:cecho("\nattacking")
-  toggles:echo("\nbashing")
-  toggles:echo("\nfasthunt")
-  toggles:echo("\nquesting")
-  toggles:echo("\ndispersing")
+  toggles:cecho("\nAttacking")
+  toggles:echo("\nBashing")
+  toggles:echo("\nFasthunt")
+  toggles:echo("\nQuesting")
+  toggles:echo("\nDispersing")
 
   --toggles:echo("attacking\n&lt;center&gt;&lt;/center&gt;bashing\n&lt;center&gt;&lt;/center&gt;fasthunt")
 end</script>
@@ -684,10 +671,10 @@ end</script>
   }, leftContainer);
   toggles2:setFontSize(9)
   toggles2:clear()
-  toggles2:cecho("\naffcalling")
-  toggles2:echo("\ncalling")
-  toggles2:echo("\nlistening")
-  toggles2:echo("\nchameleon")
+  toggles2:cecho("\nAffcalling")
+  toggles2:echo("\nCalling")
+  toggles2:echo("\nListening")
+  toggles2:echo("\nChameleon")
   --toggles2:echo("affcalling\n&lt;center&gt;&lt;/center&gt;calling\n&lt;center&gt;&lt;/center&gt;listening")
 end</script>
 					<eventHandlerList />
@@ -708,9 +695,9 @@ end
 
 function colorMonolithLabel()
     if snd.monolith then
-      monolith:setColor("medium_sea_green")
+      monolith:setColor("SlateBlue")
     else
-      monolith:setColor("firebrick")
+      monolith:setColor("DarkRed")
     end
 end
 registerAnonymousEventHandler("sunder_item_update", "colorMonolithLabel")</script>
@@ -724,9 +711,10 @@ registerAnonymousEventHandler("sunder_item_update", "colorMonolithLabel")</scrip
    name = "exits",
    x = 0, y = "64%",
    width = "100%", height = "2%",
-   color = "midnight_blue", fgColor = "white",
+   color = "black", fgColor = "OrangeRed",
    message = [[exits]],
   }, leftContainer);
+  exits:setFontSize(11.00)
 end
 
 function snd.update_exits()
@@ -748,14 +736,14 @@ registerAnonymousEventHandler("sunder_room_updated", "snd.update_exits")</script
   enorian_people = Geyser.Label:new({
    name = "enorian_people",
    x = 0, y = "66.5%",
-   width = "51%", height = "17%",
+   width = "50%", height = "16.75%",
    color = "SlateGray", fgColor = "DeepSkyBlue",
    message = [[&lt;center&gt;Enorian&lt;\center&gt;]],
   }, leftContainer);
       enorian_people:setStyleSheet([[
   border-width: 3px;
   border-style: solid;
-  border-color: SlateGray;
+  border-color: DarkGoldenRod;
   ]])
 end</script>
 					<eventHandlerList />
@@ -766,15 +754,15 @@ end</script>
 					<script>if snd.gui.enabled then
   duiran_people = Geyser.Label:new({
    name = "duiran_people",
-   x = 0, y = "83%",
-   width = "51%", height = "17%",
+   x = 0, y = "83.27%",
+   width = "50%", height = "16.75%",
    color = "SlateGray", fgColor = "DeepSkyBlue",
    message = [[&lt;center&gt;Duiran&lt;\center&gt;]],
   }, leftContainer);
       duiran_people:setStyleSheet([[
   border-width: 3px;
   border-style: solid;
-  border-color: SlateGray;
+  border-color: green;
   ]])
 end</script>
 					<eventHandlerList />
@@ -785,15 +773,15 @@ end</script>
 					<script>if snd.gui.enabled then
   spines_people = Geyser.Label:new({
    name = "spines_people",
-   x = "-51%", y = "66.5%",
-   width = "51%", height = "17%",
+   x = "-50%", y = "66.5%",
+   width = "51%", height = "16.75%",
    color = "SlateGray", fgColor = "tomato",
    message = [[&lt;center&gt;Spines&lt;\center&gt;]],
   }, leftContainer);
         spines_people:setStyleSheet([[
   border-width: 3px;
   border-style: solid;
-  border-color: SlateGray;
+  border-color: MediumPurple;
   ]])
 end</script>
 					<eventHandlerList />
@@ -804,15 +792,15 @@ end</script>
 					<script>if snd.gui.enabled then
   bloodloch_people = Geyser.Label:new({
    name = "bloodloch_people",
-   x = "-51%", y = "83%",
-   width = "51%", height = "17%",
+   x = "-50%", y = "83.27%",
+   width = "51%", height = "16.75%",
    color = "SlateGray", fgColor = "tomato",
    message = [[&lt;center&gt;Bloodloch&lt;\center&gt;]],
   }, leftContainer);
         bloodloch_people:setStyleSheet([[
   border-width: 3px;
   border-style: solid;
-  border-color: SlateGray;
+  border-color: DarkRed;
   ]])
 end</script>
 					<eventHandlerList />
@@ -1171,6 +1159,67 @@ end
 registerAnonymousEventHandler("sunder_enemy_affs_updated", "display_enemy_affs")</script>
 					<eventHandlerList />
 				</Script>
+				<Script isActive="yes" isFolder="no">
+					<name>gui_time_update</name>
+					<packageName></packageName>
+					<script>  if snd.gui.enabled then
+    time = Geyser.Label:new({
+    name = "time",
+    x = 0, y = "7%",
+    width = "100%", height = "1.75%",
+    color = "black", fgColor = "white",
+    message = [[time]],
+    }, leftContainer);
+    time:setFontSize(7.45)
+  end
+
+function gui_time_update()
+  if snd.gui.enabled then
+
+    
+    	if snd.time.t == "Late night" then
+    		time:setFontSize(8)
+    	elseif snd.time.t == "Almost midnight" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Midnight" then
+    		time:setFontSize(8)
+    	elseif snd.time.t == "After midnight" then
+    		time:setFontSize( 7.45)
+    	elseif snd.time.t == "Early morning" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Almost dawn" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Dawn" then
+    		time:setFontSize(8)
+    	elseif snd.time.t == "Mid-morning" then
+    		time:setFontSize(8)
+    	elseif snd.time.t == "Almost noon" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Hiiiigh noooon" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Early afternoon" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Late afternoon" then
+    		time:setFontSize(7.45)
+    	elseif snd.time.t == "Dusk" then
+    		time:setFontSize(8)
+    	elseif snd.time.t == "Early evening" then
+    		time:setFontSize(7.45)
+    	else 
+    		--This should only come about if they add a new time to the cycle.
+    	end
+    
+    local timecolor = "&lt;orange&gt;"
+    if snd.time.night then
+      timecolor = "&lt;gray&gt;"
+    end
+    
+    
+    time:cecho("&lt;center&gt;"..timecolor..snd.time.t.." &lt;firebrick&gt;of &lt;dark_green&gt;"..string.format("%03d",snd.time.y).."&lt;magenta&gt;/&lt;dark_green&gt;"..string.format("%02d",snd.time.m).."&lt;magenta&gt;/&lt;dark_green&gt;"..string.format("%02d",snd.time.y).."&lt;/center&gt;")
+  end
+end</script>
+					<eventHandlerList />
+				</Script>
 			</ScriptGroup>
 			<ScriptGroup isActive="yes" isFolder="yes">
 				<name>Right</name>
@@ -1243,7 +1292,7 @@ see http://wiki.mudlet.org/w/Manual:Lua_Functions#getTime for information
 how to format the string
 ]]
 --demonnic.chat.config.timestamp = "HH:mm:ss"
-demonnic.chat.config.timestamp = false
+demonnic.chat.config.timestamp = "HH:mm:ss"
 
 --[[ Should we use our own colors for the timestamp?
 Set to true if you want to specify foreground and background colors
@@ -1251,7 +1300,7 @@ for the timestamp.
 Set to false if you want the timestamps background and foreground
 colors to match that of the mud output.
 ]]
-demonnic.chat.config.timestampCustomColor = false
+demonnic.chat.config.timestampCustomColor = true
 --[[
 and what foreground color? You can either use one of the 'named' colors
 (see http://wiki.mudlet.org/images/c/c3/ShowColors.png for available colors)
@@ -1265,10 +1314,10 @@ demonnic.chat.config.timestampFG = {
 }
 then the foreground for the timestamp would be 255 read, 100 green, and 0 blue
 ]]
-demonnic.chat.config.timestampFG = "red"
+demonnic.chat.config.timestampFG = "SlateBlue"
 
 --and background? Same rules as for the foreground above
-demonnic.chat.config.timestampBG = "blue"
+demonnic.chat.config.timestampBG = "black"
 
 --[[
 This is where you say what corner of the screen you want the tabbed chat on
@@ -1365,7 +1414,7 @@ Number of characters to wrap the chatlines at.
 This will also determine how wide the chat windows are.
 ]]
 
-demonnic.chat.config.width = 55
+demonnic.chat.config.width = 90
 
 --[[
 Set the color for the active tab. R,G,B format.
@@ -1413,7 +1462,7 @@ Set the color for the text on the inactive tabs. Uses color names.
 Defaulted this to white. So the tabs you're not looking at will be white text on boring grey background.
 ]]
 
-demonnic.chat.config.inactiveTabText = "white"
+demonnic.chat.config.inactiveTabText = "gray"
 
 --[[
 have to make sure a currentTab is set... 
@@ -1667,6 +1716,7 @@ function demonnic.chat:append(chat)
       colorLeader = string.format("&lt;%s,%s,%s:%s,%s,%s&gt;",ofr,ofg,ofb,obr,obg,obb)
     end
     local fullstamp = string.format("%s%s",colorLeader,timestamp)
+    
       demonnic.chat.windows[chat]:decho(fullstamp)
       demonnic.chat.windows[chat]:echo(" ")
       if demonnic.chat.config.Alltab then 
@@ -1743,6 +1793,39 @@ function demonnic.chat:bottomleft()
     width=string.format("%sc",demonnic.chat.config.width),
     height=string.format("%ic", demonnic.chat.config.lines + 2),
   }
+end
+
+function sendTimestamp(chat)
+  -- Handle timestamps
+  if snd.toggles.chattime and demonnic.chat.config.timestamp then
+    local timestamp = getTime(true, demonnic.chat.config.timestamp)
+    local tsfg = {}
+    local tsbg = {}
+    local colorLeader = ""
+    if demonnic.chat.config.timestampCustomColor then
+      if type(demonnic.chat.config.timestampFG) == "string" then
+        tsfg = color_table[demonnic.chat.config.timestampFG]
+      else
+        tsfg = demonnic.chat.config.timestampFG
+      end
+      if type(demonnic.chat.config.timestampBG) == "string" then
+        tsbg = color_table[demonnic.chat.config.timestampBG]
+      else
+        tsbg = demonnic.chat.config.timestampBG
+      end
+      colorLeader = string.format("&lt;%s,%s,%s:%s,%s,%s&gt;",tsfg[1],tsfg[2],tsfg[3],tsbg[1],tsbg[2],tsbg[3])
+    else
+      colorLeader = string.format("&lt;%s,%s,%s:%s,%s,%s&gt;",ofr,ofg,ofb,obr,obg,obb)
+    end
+    local fullstamp = string.format("%s%s",colorLeader,timestamp)
+    
+      demonnic.chat.windows[chat]:decho(fullstamp)
+      demonnic.chat.windows[chat]:echo(" ")
+      if demonnic.chat.config.Alltab then 
+        demonnic.chat.windows[demonnic.chat.config.Alltab]:decho(fullstamp)
+        demonnic.chat.windows[demonnic.chat.config.Alltab]:echo(" ")
+      end
+  end
 end</script>
 							<eventHandlerList />
 						</Script>
@@ -1880,17 +1963,17 @@ registerAnonymousEventHandler("sunder_update_vitals", "snd.set_vitals")</script>
     if snd.toggles[tgs[tog]] then
       if tgs[tog] == "dispersing" then
         if snd.disperse == "callers" then
-    			toggles:cecho("\n&lt;yellow&gt;dispersing")
+    			toggles:cecho("\n&lt;yellow&gt;Dispersing")
     		elseif snd.disperse == "all" then
-    			toggles:cecho("\n&lt;green&gt;dispersing")
+    			toggles:cecho("\n&lt;green&gt;Dispersing")
         else
-          toggles:cecho("\n&lt;red&gt;dispersing")
+          toggles:cecho("\n&lt;red&gt;Dispersing")
         end
       else
-        toggles:cecho("\n&lt;green&gt;" .. tgs[tog])
+        toggles:cecho("\n&lt;green&gt;" .. tgs[tog]:gsub("^%l", string.upper))
       end
     else
-      toggles:cecho("\n&lt;red&gt;" .. tgs[tog])
+      toggles:cecho("\n&lt;red&gt;" .. tgs[tog]:gsub("^%l", string.upper))
     end
   end
   
@@ -1898,9 +1981,9 @@ registerAnonymousEventHandler("sunder_update_vitals", "snd.set_vitals")</script>
   
   for tog in pairs(tgs) do
     if snd.toggles[tgs[tog]] then
-      toggles2:cecho("\n&lt;green&gt;" .. tgs[tog])
+      toggles2:cecho("\n&lt;green&gt;" .. tgs[tog]:gsub("^%l", string.upper))
     else
-      toggles2:cecho("\n&lt;red&gt;" .. tgs[tog])
+      toggles2:cecho("\n&lt;red&gt;" .. tgs[tog]:gsub("^%l", string.upper))
     end
   end
 end
@@ -1939,7 +2022,7 @@ registerAnonymousEventHandler("sunder_update_toggles", "snd.updateToggles")</scr
     
 
   if snd.gui.enabled then
-    local colors = {["Enorian"] = npb.t.config.colors["enorian"], ["Duiran"] = npb.t.config.colors["duiran"], ["Spinesreach"] = npb.t.config.colors["spinesreach"], ["Bloodloch"] = npb.t.config.colors["bloodloch"]}
+    local colors = {["Enorian"] = npb.t.config.colors["enorian"] or "gold", ["Duiran"] = npb.t.config.colors["duiran"] or "lawn_green", ["Spinesreach"] = npb.t.config.colors["spinesreach"] or "medium_purple", ["Bloodloch"] = npb.t.config.colors["bloodloch"] or "firebrick"}
     -- if sndNDB ~= nil then
     --  colors = sndNDB.highlighting
     -- end
@@ -1969,6 +2052,7 @@ snd.channel_list =
   {
     ["newbie"] = "Misc",
     ["market"] = "Misc",
+    ["alerts"] = "Misc",
     ["web"] = "Web",
     ["ct"] = "City",
     ["cnt"] = "City",
@@ -2076,7 +2160,6 @@ function gmcp_communication()
   
   if snd.channel_ignores[channel] then return false end
 
-  
   --NDB highlighting of text
   if sndNDB.highlightNames then
     local format = string.match(text, "&lt;%d+.-&gt;")
@@ -2098,9 +2181,77 @@ function gmcp_communication()
     end
   end
   
+   -- Handle timestamps
+  sendTimestamp(snd.last_channel)
+  
   demonnic.chat:decho(snd.last_channel, text.."\n")
   -- enableTrigger("generic capture")
-end</script>
+end
+
+function gcmp_deaths()
+ 
+  local text = gmcp.Deathsight.message
+  local assists = gmcp.Deathsight.assists
+  local rawtext = ansi2string(text)
+  --text = ansi2decho(text)
+  text = text:gsub(string.char(27) .. [[.-]] .. string.char(4), "")
+ 
+  local linecolor = "&lt;100,100,150&gt;"
+  --NDB highlighting of text
+  if sndNDB.highlightNames then
+    local alreadyHighlighted = {}
+    for word in string.gmatch(text, "%a+") do
+      if sndNDB_Exists(word) and not table.contains(alreadyHighlighted, word) then
+        local color = sndNDB_getColour(word) or "white"
+        color =
+          "&lt;" ..
+          color_table[color][1] ..
+          "," ..
+          color_table[color][2] ..
+          "," ..
+          color_table[color][3] ..
+          "&gt;"
+        text = linecolor .. text:gsub(word, color .. word .. linecolor)
+        table.insert(alreadyHighlighted, word)
+      end
+    end
+  end
+  
+  -- Handle timestamps
+  sendTimestamp("Misc")
+  demonnic.chat:decho("Misc", text.."\n")
+  
+  if assists~="" then
+    local people = string.match(assists, "They were assisted by: (.+)%.\n"):split(", ")
+    local text = linecolor .. "They were assisted by: "
+    for i, person in ipairs(people) do
+      if sndNDB.highlightNames and sndNDB_Exists(person) then
+        local color = sndNDB_getColour(person) or "white"
+        color =
+          "&lt;" ..
+          color_table[color][1] ..
+          "," ..
+          color_table[color][2] ..
+          "," ..
+          color_table[color][3] ..
+          "&gt;"
+        if i &gt; 1 then
+          text = text .. linecolor .. ", " .. color .. person
+        else
+          text = text .. color .. person
+        end
+      else
+         if i &gt; 1 then
+          text = text .. linecolor .. ", " .. person
+        else
+          text = text .. person
+        end
+      end
+    end
+    demonnic.chat:decho("Misc", text.."\n")
+  end
+end
+registerAnonymousEventHandler("gmcp.Deathsight", "gcmp_deaths")</script>
 					<eventHandlerList>
 						<string>gmcp.Comm.Channel.Start</string>
 					</eventHandlerList>

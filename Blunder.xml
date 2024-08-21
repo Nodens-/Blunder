@@ -7113,7 +7113,8 @@ end</script>
 						</Trigger>
 						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 							<name>Path Distance</name>
-							<script>snd.pathfind_distance = tonumber(matches[2])</script>
+						<script>snd.pathfind_distance = tonumber(matches[2])
+snd.pathfind_remain_trig = false</script>
 							<triggerType>0</triggerType>
 							<conditonLineDelta>0</conditonLineDelta>
 							<mStayOpen>0</mStayOpen>
@@ -7133,7 +7134,8 @@ end</script>
 						</Trigger>
 						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 							<name>Path Left To Travel</name>
-							<script>snd.pathfind_remain = tonumber(matches[2])</script>
+						<script>snd.pathfind_remain = tonumber(matches[2])
+snd.pathfind_remain_trig = true</script>
 							<triggerType>0</triggerType>
 							<conditonLineDelta>0</conditonLineDelta>
 							<mStayOpen>0</mStayOpen>
@@ -7151,13 +7153,18 @@ end</script>
 								<integer>1</integer>
 							</regexCodePropertyList>
 						</Trigger>
-						<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+					<Trigger isActive="no" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 							<name>Blockades</name>
 							<script>if gmcp.Char.Vitals.mounted~="0" then
   snd.dismount()
 end
 
-local nextdir = snd.pathfind_distance - snd.pathfind_remain + 1
+local nextdir
+if snd.pathfind_remain_trig then
+  nextdir = snd.pathfind_distance - snd.pathfind_remain + 1
+else
+  nextdir = 1
+end
 local direction = snd.pathfind_path[nextdir]
 local skillnotfound = false
 local advance = false
@@ -7169,17 +7176,18 @@ elseif hasSkill("Tumbling") then
 elseif hasSkill("Advance") then
   advance = true
   send("qb gravitation advance 4 " .. direction)
-  tempTimer(4.1, [[send("path track city")]])
+  tempTimer(4.1, [[send("path track "..snd.pathfind_destination)]])
 else
   skillnotfound = true
 end
 
 if not skillnotfound and not advance then
-  tempTimer(2.7, [[send("path track city")]])
+  tempTimer(2.7, [[send("path track "..snd.pathfind_destination)]])
 end
 if snd.toggles.automount then
   snd.mount()
 end
+snd.pathfind_remain_trig = false
 disableTrigger("Blockades")</script>
 							<triggerType>0</triggerType>
 							<conditonLineDelta>0</conditonLineDelta>
@@ -8633,6 +8641,30 @@ end</script>
 							<string>^(\w+ .+) uses (Animation|Synthesis) (\w+)(?: \((.+)\))? on (\w+)\.$</string>
 						</regexCodeList>
 						<regexCodePropertyList>
+							<integer>1</integer>
+						</regexCodePropertyList>
+					</Trigger>
+					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
+						<name>Blood Pillar</name>
+						<script>snd.pillarused = false</script>
+						<triggerType>0</triggerType>
+						<conditonLineDelta>0</conditonLineDelta>
+						<mStayOpen>0</mStayOpen>
+						<mCommand></mCommand>
+						<packageName></packageName>
+						<mFgColor>#ff0000</mFgColor>
+						<mBgColor>#ffff00</mBgColor>
+						<mSoundFile></mSoundFile>
+						<colorTriggerFgColor>#000000</colorTriggerFgColor>
+						<colorTriggerBgColor>#000000</colorTriggerBgColor>
+						<regexCodeList>
+							<string>The pillar tilts to one side and collapses, its magic finally running dry.</string>
+							<string>You have destroyed a blood-webbed pillar.</string>
+							<string>^\w+ has destroyed a blood-webbed pillar\.$</string>
+						</regexCodeList>
+						<regexCodePropertyList>
+							<integer>3</integer>
+							<integer>3</integer>
 							<integer>1</integer>
 						</regexCodePropertyList>
 					</Trigger>
@@ -33119,30 +33151,6 @@ end</script>
 						</regexCodePropertyList>
 					</Trigger>
 				</TriggerGroup>
-				<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
-					<name>Blood Pillar</name>
-					<script>snd.pillarused = false</script>
-					<triggerType>0</triggerType>
-					<conditonLineDelta>0</conditonLineDelta>
-					<mStayOpen>0</mStayOpen>
-					<mCommand></mCommand>
-					<packageName></packageName>
-					<mFgColor>#ff0000</mFgColor>
-					<mBgColor>#ffff00</mBgColor>
-					<mSoundFile></mSoundFile>
-					<colorTriggerFgColor>#000000</colorTriggerFgColor>
-					<colorTriggerBgColor>#000000</colorTriggerBgColor>
-					<regexCodeList>
-						<string>The pillar tilts to one side and collapses, its magic finally running dry.</string>
-						<string>You have destroyed a blood-webbed pillar.</string>
-						<string>^\w+ has destroyed a blood-webbed pillar\.$</string>
-					</regexCodeList>
-					<regexCodePropertyList>
-						<integer>3</integer>
-						<integer>3</integer>
-						<integer>1</integer>
-					</regexCodePropertyList>
-				</Trigger>
 			</TriggerGroup>
 			<TriggerGroup isActive="yes" isFolder="yes" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 				<name>Ylem</name>
@@ -34777,7 +34785,7 @@ end</script>
 					<regexCodePropertyList />
 					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 						<name>Get that key</name>
-						<script>if snd.toggles.questing then
+						<script>if snd.toggles.questing and snd.my.area == "the Arurer Haven" then
 	send("qeb take 158672")
 	havekey = true
 	tempTimer(600, [[havekey = false]])
@@ -34801,7 +34809,7 @@ end</script>
 					</Trigger>
 					<Trigger isActive="yes" isFolder="no" isTempTrigger="no" isMultiline="no" isPerlSlashGOption="no" isColorizerTrigger="no" isFilterTrigger="no" isSoundTrigger="no" isColorTrigger="no" isColorTriggerFg="no" isColorTriggerBg="no">
 						<name>Unlock chest</name>
-						<script>if snd.toggles.questing then
+						<script>if snd.toggles.questing and snd.my.area == "the Arurer Haven" then
 	if havekey then
 		send("qeb unlock chest"..snd.sep.."open chest"..snd.sep.."take seashell from chest"..snd.sep.."give seashell to gunder")
 		havekey = false
@@ -38444,16 +38452,30 @@ cecho("&lt;red&gt;Will use &lt;orange&gt;"..(snd.toggles.laesan and "Laesan" or 
 					</Alias>
 					<Alias isActive="yes" isFolder="no">
 						<name>Prism Defense</name>
-						<script>if matches[2] == "off" then
+						<script>if isActive("Prism Defense", "trigger") &gt; 0 then
   disableTrigger("Prism Defense")
-  cecho("&lt;yellow&gt;Prism Defense DISABLED.")
+  snd.message(string.title("Prism Defense") .. " &lt;red&gt;OFF&lt;white&gt;!", "toggle")
  else
   enableTrigger("Prism Defense")
-  cecho("&lt;yellow&gt;Prism Defense ENABLED.")
+  snd.message(string.title("Prism Defense") .. " &lt;green&gt;ON&lt;white&gt;!", "toggle")
 end</script>
 						<command></command>
 						<packageName></packageName>
-						<regex>^prismdef\s?(\w+)?$</regex>
+						<regex>^toggle prismdef$</regex>
+					</Alias>
+					<Alias isActive="yes" isFolder="no">
+						<name>Stability Artifact</name>
+						<script>snd.toggle("stability")</script>
+						<command></command>
+						<packageName></packageName>
+						<regex>^toggle stability$</regex>
+					</Alias>
+					<Alias isActive="yes" isFolder="no">
+						<name>Chat Timestamps</name>
+						<script>snd.toggle("chattime")</script>
+						<command></command>
+						<packageName></packageName>
+						<regex>^toggle chattime$</regex>
 					</Alias>
 				</AliasGroup>
 				<AliasGroup isActive="yes" isFolder="yes">
@@ -38514,7 +38536,9 @@ end</script>
 else
  snd.send("qeb "..matches[2])
 end
-</script>
+if not snd.toggles.bashing then
+  raiseEvent("sunder_update_toggles")
+end</script>
 						<command></command>
 						<packageName></packageName>
 						<regex>^(n|e|s|w|ne|nw|se|sw|in|up?|out|o|d|down)$</regex>
@@ -38571,8 +38595,9 @@ local temp, maptable = yajl.to_value(tmp), {}
 for k, v in pairs(temp) do
   maptable[k:lower()] = v
 end
-local destinationRoom = maptable[matches[2]:lower()]
+destinationRoom = maptable[matches[2]:lower()]
 snd.moving_to = (destinationRoom or snd.landmarks[matches[2]:lower()] or matches[2])
+snd.pathfind_destination = snd.moving_to
 
 snd.core()</script>
 						<command></command>
@@ -38873,7 +38898,8 @@ send(" ")</script>
 				</Alias>
 				<Alias isActive="yes" isFolder="no">
 					<name>defense options</name>
-					<script>local selection = ""
+					<script>class_catch()
+local selection = ""
 if matches[3] then 
   selection = matches[3] 
 else
@@ -58878,7 +58904,6 @@ registerAnonymousEventHandler("gmcp.Char.Name", "snd.login")</script>
 					<script>function snd.deathCheck()
   if gmcp.Char.Afflictions.Add.name == "dead" then
     snd.stap()
-    snd.reset_me()
     snd.target_gone = true
     snd.toggles.active = false
     raiseEvent("sunder_update_toggles")
@@ -58898,6 +58923,8 @@ function snd.deathClear()
         snd.defenses[i].needit = false
       end
       snd.toggles.active = true
+      raiseEvent("sunder_enemy_affs_updated")
+      raiseEvent("sunder_enemy_limbs_updated")
       raiseEvent("sunder_update_toggles")
     end
   end
@@ -59049,6 +59076,7 @@ vermin = false, -- Toggle vermin walker/basher
 goggles = false, -- Do you have the antiquated artifact goggles?
 goggle_level = 0,
 gauntlet_level = 0,
+stability = false, -- Do you have the stability artifact?
 diagaffs = 3,
 nontargetgags = true, -- spam filter for removing non-target curing
 fitness = true, -- have access to the fitness ability
@@ -59065,11 +59093,12 @@ gags = true,
 targetrune = false,
 alerts = false,
 followbash = false,
-laesan = true, --try to use laesan while predator bashing. If false, will go for Ein-fasit instead.
+laesan = true, -- try to use laesan while predator bashing. If false, will go for Ein-fasit instead.
 ascendedtype = "none",
 mount = "123456",
 automount = false,
-highlights = true, --npb highlights
+highlights = true, -- npb highlights
+chattime = false -- chat timestamps
 }</script>
 						<eventHandlerList />
 					</Script>
@@ -59274,6 +59303,14 @@ area = "",
 room = "",
 room_name = "",
 room_exits = "",
+}
+
+snd.time = snd.time or {
+t = "",
+d = "",
+m = "",
+y = "",
+night = "",
 }
 
 snd.new = snd.new or {
@@ -59546,6 +59583,28 @@ snd.weapon_types = {
 "kite",
 "tower",
 "shield",
+}
+
+snd.weapon_two_handed = {
+-- Large Blades
+"bardiche",
+"bastard",
+"estoc",
+"falx",
+"glaive",
+"greatspear",
+"halberd",
+"scythe",
+"lance",
+"manta",
+-- Large Bludgeons
+"cudgel",
+"greatmaul",
+"quarterstaff",
+"warhammer",
+"wargauntlets",
+-- Large Thrown
+"javelin",
 }</script>
 						<eventHandlerList />
 					</Script>
@@ -59694,11 +59753,17 @@ end</script>
   if snd.class == "Akkari" then
     snd.defenses.def_stalking = snd.alternative_class_defenses.Akkari_stalking
     snd.defenses.def_hiding = snd.alternative_class_defenses.Akkari_hiding
+    if gmcp.Char.Status.spec ~= "Dosan" then
+      snd.defenses.def_transcendence.needit = false
+    end
   end
   
   if snd.class == "Praenomen" then
     snd.defenses.def_stalking = snd.alternative_class_defenses.Praenomen_stalking
     snd.defenses.def_hiding = snd.alternative_class_defenses.Praenomen_hiding
+    if gmcp.Char.Status.spec ~= "Phreneses" then
+      snd.defenses.def_bloodrage.needit = false
+    end
   end
   if snd.class == "Shapeshifter" then
     snd.defenses.def_celerity = snd.alternative_class_defenses.Shapeshifter_celerity
@@ -59707,6 +59772,18 @@ end</script>
   end
   if hasSkill("Insomnia") then
     snd.defenses.def_insomnia = snd.alternative_class_defenses.Skill_insomnia
+  end
+  if hasSkill("Deathsight") then
+    snd.defenses.def_deathsight = snd.alternative_class_defenses.Skill_deathsight
+  end
+  if hasSkill("Thirdeye") then
+    snd.defenses.def_thirdeye = snd.alternative_class_defenses.Skill_thirdeye
+  end
+  if snd.toggles["stability"] then
+    snd.defenses.def_density = snd.alternative_class_defenses.Artifact_stability
+    if not snd.def_have("def_density") and snd.defenses.def_density.needit == false then
+      snd.defenses.def_density.needit = true
+    end
   end
 
   
@@ -59722,6 +59799,85 @@ end</script>
 end</script>
 						<eventHandlerList>
 							<string>gmcp.Char.Vitals</string>
+						</eventHandlerList>
+					</Script>
+					<Script isActive="yes" isFolder="no">
+						<name>time_update</name>
+						<packageName></packageName>
+						<script>registerAnonymousEventHandler("sunder_login","time_update")
+function time_update()
+  sendGMCP("IRE.Time.Request")
+    
+  snd.time.d = gmcp.IRE.Time.List.day
+  snd.time.m = gmcp.IRE.Time.List.month
+  snd.time.y = gmcp.IRE.Time.List.year
+    
+  snd.time.t = gmcp.IRE.Time.List.time
+  if snd.time.t:find("Twilight has overtaken the light") then
+    	snd.time.t = "Early evening"
+    snd.time.night = true
+  	elseif snd.time.t:find("late night, approaching midnight") then
+    snd.time.t = "Late night"
+    snd.time.night = true
+  elseif snd.time.t:find("It is deep night in Aetolia") then
+    	snd.time.t = "Almost midnight"
+    snd.time.night = true
+  	elseif snd.time.t:find("It is deepest midnight.") then
+    	snd.time.t = "Midnight"
+    snd.time.night = true
+  elseif snd.time.t:find("It is the middle of the night in Aetolia") then
+    	snd.time.t = "After midnight"
+    snd.time.night = true
+  elseif snd.time.t:find("early morning in Aetolia") then
+    	snd.time.t = "Early morning"
+    snd.time.night = true
+  elseif snd.time.t:find("approaching dawn.") then
+    	snd.time.t = "Almost dawn"
+    snd.time.night = true
+  	elseif snd.time.t:find("It is dawn.") then
+    	snd.time.t = "Dawn"
+    snd.time.night = false
+  	elseif snd.time.t:find("It's mid-") then
+    	snd.time.t = "Mid-morning"
+    snd.time.night = false
+  elseif snd.time.t:find("approaching noon") then
+    	snd.time.t = "Almost noon"
+    snd.time.night = false
+  elseif snd.time.t:find("exactly noon") then
+    	snd.time.t = "Hiiiigh noooon"
+    snd.time.night = false
+  	elseif snd.time.t:find("early afternoon") then
+    	snd.time.t = "Early afternoon"
+    snd.time.night = false
+  elseif snd.time.t:find("It is late afternoon in Aetolia") then
+    	snd.time.t = "Late afternoon"
+    snd.time.night = false
+  elseif snd.time.t:find("dusk in Aet") then
+    	snd.time.t = "Dusk"
+    snd.time.night = false
+  else 
+    	--This should only come about if they add a new time to the cycle.
+  	end
+    
+  -- Stuff that should happen on time update
+  if snd.class == "Praenomen" then
+    if snd.time.night then
+      if not snd.def_have("def_stalking") and not snd.defenses["def_stalking"].needit then
+        snd.defenses["def_stalking"].needit = true
+        send(" ")
+      end
+    else
+      snd.defenses["def_stalking"].needit = false
+    end
+  end
+  
+  if snd.gui.enabled then
+    gui_time_update()
+    raiseEvent("sunder_update_vitals")
+  end   
+end</script>
+						<eventHandlerList>
+							<string>gmcp.IRE.Time.Update</string>
 						</eventHandlerList>
 					</Script>
 				</ScriptGroup>
@@ -60212,7 +60368,7 @@ function snd.message(string, type)
     else
       line = "\n"
     end
-    cecho(line.."&lt;green&gt;[&lt;white&gt;SND&lt;green&gt;]&lt;"..color.."&gt; "..string)
+    cecho(line.."&lt;SlateBlue&gt;[&lt;firebrick&gt;Blunder&lt;SlateBlue&gt;]&lt;"..color.."&gt; "..string)
     if type == "reset" then
       send(" ")
     end
@@ -60576,7 +60732,7 @@ end
         cecho("&lt;yellow&gt;Taking detour.")
       end
     end
-    if snd.moving_to == "city" then
+    if snd.moving_to ~= "none" then
       enableTrigger("Blockades")
     end
     if snd.toggles.gallop then
@@ -60744,6 +60900,15 @@ function snd.weaponType(weapon)
     end
   end
   return weapon
+end
+
+function snd.weaponTwohanded(weapon)
+  for wtype in pairs(snd.weapon_two_handed) do
+    if string.find(weapon, snd.weapon_two_handed[wtype]) then
+      return true
+    end
+  end
+  return false
 end
 
 function snd.skillrankcheck(rank)
@@ -62973,9 +63138,9 @@ def_deafness = {defense = "deafness", type = "normal", effect = "Protects from s
 def_blindness = {defense = "blindness", type = "normal", effect = "Protects from visual effects", balance = {herb = "amaurosis"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
 def_waterbreathing = {defense = "waterbreathing", type = "normal", effect = "Prevents choking underwater", balance = {herb = "waterbreathing"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
 def_kola = {defense = "instawake", type = "normal", effect = "Removes the WAKE delay", balance = {herb = "stimulant"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
-def_insomnia = {defense = "insomnia", type = "normal", effect = "Prevents sleep effects", balance = {special = "insomnia"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
-def_deathsight = {defense = "deathsight", type = "normal", effect = "Reports player deaths", balance = {special = "deathsight"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
-def_thirdeye = {defense = "thirdeye", type = "normal", effect = "Adds locations to WHO", balance = {special = "thirdeye"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
+def_insomnia = {defense = "insomnia", type = "normal", effect = "Prevents sleep effects", balance = {eat = "kawhepill"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
+def_deathsight = {defense = "deathsight", type = "normal", effect = "Reports player deaths", balance = {eat = "thanatonin"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
+def_thirdeye = {defense = "thirdeye", type = "normal", effect = "Adds locations to WHO", balance = {eat = "acuity"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
 def_venom = {defense = "antivenin", type = "normal", effect = "Protects against poison damage", balance = {vial = "antivenin"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
 def_levitation = {defense = "levitation", type = "normal", effect = "Protects against falling effects", balance = {vial = "levitation"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
 def_frost = {defense = "temperance", type = "normal", effect = "Protects against fire damage", balance = {vial = "frost"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
@@ -63610,22 +63775,21 @@ Ascendril_empowered_moon = {defense = "empowered_moon", type = "normal", effect 
 Bloodborn_empowered_moon = {defense = "empowered_moon", type = "normal", effect = "extra mana recovery", balance = {balanceequilibriumtake = "unleash acumen"}, state = "down", needit = false, timer = createStopWatch(), skill = "Acumen" },
 Sciomancer_empowered_moon = {defense = "empowered_moon", type = "normal", effect = "extra mana recovery", balance = {balanceequilibriumtake = "cast sagacity"}, state = "down", needit = false, timer = createStopWatch(), skill = "Sagacity" },
 Runecarver_empowered_moon = {defense = "empowered_moon", type = "normal", effect = "extra mana recovery", balance = {balanceequilibriumtake = "runecarve mysticism"}, state = "down", needit = false, timer = createStopWatch(), skill = "Mysticism" },
-Skill_insomnia = {defense = "insomnia", type = "normal", effect = "Prevents sleep effects", balance = {special = "insomnia"}, state = "down", needit = false, timer = createStopWatch(), skill = "Insomnia"},
 Earthcaller_insulation = {defense = "insulation", type = "normal", effect = "Prevents frozen buildup", balance = {balanceequilibriumtake = "tectonic insulation"}, state = "down", needit = false, timer = createStopWatch(), skill = "Insulation"},
 Luminary_insulation = {defense = "insulation", type = "normal", effect = "Prevents frozen buildup", balance = {balanceequilibriumtake = "evoke warmth"}, state = "down", needit = false, timer = createStopWatch(), skill = "Warmth"},
 Ascendril_empowered_boar = {defense = "empowered_boar", type = "DarkOrange", effect = "extra health recovery", balance = {balanceequilibriumtake = "cast vivacity"}, state = "down", needit = false, timer = createStopWatch(), skill = "Vivacity" },
 Bloodborn_empowered_boar = {defense = "empowered_boar", type = "indian_red", effect = "extra health recovery", balance = {balanceequilibriumtake = "unleash acumen"}, state = "down", needit = false, timer = createStopWatch(), skill = "Acumen" },
-}
-
-
-
-</script>
+Skill_insomnia = {defense = "insomnia", type = "normal", effect = "Prevents sleep effects", balance = {special = "insomnia"}, state = "down", needit = false, timer = createStopWatch(), skill = "Insomnia"},
+Skill_deathsight = {defense = "deathsight", type = "normal", effect = "Reports player deaths", balance = {special = "deathsight"}, state = "down", needit = false, timer = createStopWatch(), skill = "Deathsight"},
+Skill_thirdeye = {defense = "thirdeye", type = "normal", effect = "Adds locations to WHO", balance = {special = "thirdeye"}, state = "down", needit = false, timer = createStopWatch(), skill = "Thirdeye"},
+Artifact_stability = {defense = "density", type = "red", effect = "Resists forced movement", balance = {special = "stability"}, state = "down", needit = false, timer = createStopWatch(), skill = "Generic"},
+}</script>
 							<eventHandlerList />
 						</Script>
 						<Script isActive="yes" isFolder="no">
 							<name>give/take defenses</name>
 							<packageName></packageName>
-							<script>local formDefs = {
+							<script>  local formDefs = {
 	def_adherent_form = true,
 	def_seraph_form = true,
 	def_aetherial_form = true,
@@ -63743,6 +63907,7 @@ end</script>
   ["Your mind has been touched by the essence of the Underking."] = "deathsight",
   ["You have insomnia, and cannot easily go to sleep."] = "insomnia",
   ["You possess the sight of the third eye."] = "thirdeye",
+  ["A seen sense that allows you to pierce through the shroud and see the location of individuals."] = "thirdeye",
   ["Your resistance to damage by poison has been increased."] = "venom",
   ["You are tempered against fire damage."] = "frost",
   ["You are tempered against elemental magic."] = "arcane",
@@ -78263,6 +78428,7 @@ end
 
 function snd.shapeshifter_bash()
   hp = 100*(gmcp.Char.Vitals.hp/gmcp.Char.Vitals.maxhp)
+  mad = tonumber(gmcp.Char.Vitals.madness)
 	
   if hp &lt;=40 and snd.shield_check() then
     if snd.punisher then
@@ -78272,6 +78438,9 @@ function snd.shapeshifter_bash()
 	else
     battack = "combo "..snd.bashing.target.." slash slash"
 	end
+  if mad &gt;= 69 then
+    battack = "eat corpse" .. snd.sep .. battack
+  end
 end
 
 function snd.infiltrator_bash()
@@ -80149,6 +80318,8 @@ function snd.load_def(option)
           if snd.balance.vitality then
             snd.defenses[h].needit = true
           end
+        elseif h == "def_divert_melee" and not hasSkill("ReflexiveDiversion") then
+          snd.defenses[h].needit = false
         else
           snd.defenses[h].needit = true
         end
@@ -80189,6 +80360,11 @@ def_speed = "on",
 def_dodge_melee = "on",
 def_nightsight = "on",
 def_clarity = "on",
+def_fangbarrier = "on",
+def_divert_melee = "on",
+--def_blindness = "on",
+--def_deafness = "on",
+def_irongrip = "on",
 },
 
 akkari = {
@@ -80200,7 +80376,8 @@ def_acuity = "on",
 def_stalking = "once",
 def_suppressed = "once",
 def_retaliation = "once",
-def_ascetic = "on"
+def_ascetic = "on",
+def_transcendence = "on",
 },
 
 
@@ -80342,7 +80519,7 @@ def_concentrate = "on",
 def_shadowblow = "on",
 def_blurred = "on",
 def_elusion = "on",
--- def_bloodrage = "on",
+def_bloodrage = "on",
 -- def_deathlink = "on",
 },
 
@@ -82436,7 +82613,7 @@ end</script>
     if (100 * (gmcp.Char.Vitals.mp / gmcp.Char.Vitals.maxmp)) &lt;= 40 then
       table.insert(snd.alerts, "\n&lt;brown&gt;       YOUR MANA IS LOW")
     end
-    if tonumber(gmcp.Char.Vitals.madness) &gt;= 60 then
+    if tonumber(gmcp.Char.Vitals.madness) &gt;= 69 then
       table.insert(snd.alerts, "\n&lt;red&gt;      THE MADNESS IS COMING, EAT UP")
     end
     if #snd.alerts &gt;= 1 then
